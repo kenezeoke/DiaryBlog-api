@@ -7,7 +7,7 @@ import asyncWrapper from "../middleware/async.js"
 
 export const getAllTasks = asyncWrapper(async (req,res) =>{
     const tasks = await Task.find({}).sort({ createdAt: -1}).limit(10)
-    res.status(200).json({tasks})
+    res.status(200).json(tasks)
 })
 
 export const getTask = asyncWrapper(async (req,res) => {
@@ -17,12 +17,12 @@ export const getTask = asyncWrapper(async (req,res) => {
     if (!task){
         return res.status(404).send("Task not found")
     }
-    res.status(200).json({task})
+    res.status(200).json(task)
 })
 
 export const createTask = asyncWrapper(async(req,res) => {
     const task = await Task.create(req.body)
-    res.status(200).json({task})
+    res.status(200).json(task)
 })
 
 export const updateTask = asyncWrapper(async(req,res) => {
@@ -34,7 +34,7 @@ export const updateTask = asyncWrapper(async(req,res) => {
     if (!task){
         return res.status(404).send("Task not found")
     }
-    res.status(200).json({task})
+    res.status(200).json(task)
 })
 
  export const deleteTask = asyncWrapper(async (req,res) => {
@@ -43,6 +43,6 @@ export const updateTask = asyncWrapper(async(req,res) => {
     if (!task){
         return res.status(404).send("Task not found")
     }
-    res.status(200).json({task})
+    res.status(200).json(task)
 
 })

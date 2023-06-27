@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import connectdb from "./db/connect.js"
 import router from "./routes/routes.js"
 import notFound from "./middleware/notFound.js"
+import cors from "cors"
 
 dotenv.config()
 
@@ -14,7 +15,10 @@ app.get("/", (req,res) => {
     res.json({msg:"hey"})
 })
 app.use("/api/v1/posts", router)
+
 app.use(notFound)
+
+app.use(cors())
 
 const port = process.env.PORT || 8000
 const url= process.env.MONGO_URI
