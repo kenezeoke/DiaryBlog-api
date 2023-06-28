@@ -4,6 +4,7 @@ import connectdb from "./db/connect.js"
 import router from "./routes/routes.js"
 import notFound from "./middleware/notFound.js"
 import cors from "cors"
+import userRoutes from "./routes/users.js"
 
 dotenv.config()
 
@@ -14,7 +15,9 @@ app.use(express.json())
 app.get("/", (req,res) => {
     res.json({msg:"hey"})
 })
+
 app.use("/api/v1/posts", router)
+app.use("/api/v1/user", userRoutes)
 
 app.use(notFound)
 
