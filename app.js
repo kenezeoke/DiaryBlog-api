@@ -12,6 +12,8 @@ const app = express();
 
 
 app.use(express.json())
+app.use(cors())
+
 app.get("/", (req,res) => {
     res.json({msg:"hey"})
 })
@@ -21,7 +23,20 @@ app.use("/api/v1/user", userRoutes)
 
 app.use(notFound)
 
-app.use(cors())
+
+/*app.use(function(req, res, next){  
+    res.header('Access-Control-Allow-Methods',
+    'GET,PUT,POST,DELETE,OPTIONS');  
+    res.header('Access-Control-Allow-Headers',
+    'Access-Control-Allow-Origin,*');  
+    res.header('Access-Control-Allow-Credentials', true);  
+    res.header('Access-Control-Allow-Origin',
+    'http:localhost:3000');
+ if (req.method === 'OPTIONS') {
+     res.status(200);
+ } next(); })
+app.options('*', cors())
+*/
 
 const port = process.env.PORT || 8000
 const url= process.env.MONGO_URI

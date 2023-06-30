@@ -1,12 +1,12 @@
 import mongoose,{mongo} from "mongoose"
 import Task from "../models/Task.js"
-import User from "../models/User.js"
 import asyncWrapper from "../middleware/async.js"
 
 
 
 export const getAllTasks = asyncWrapper(async (req,res) =>{
-    const tasks = await Task.find({}).sort({ createdAt: -1}).limit(10)
+    const user_id = req.user._id
+    const tasks = await Task.find({user_id}).sort({ createdAt: -1}).limit(10)
     res.status(200).json(tasks)
 })
 
@@ -21,7 +21,8 @@ export const getTask = asyncWrapper(async (req,res) => {
 })
 
 export const createTask = asyncWrapper(async(req,res) => {
-    const task = await Task.create(req.body)
+    const user_id = req.user._id
+    const task = await Task.create({...req.body, user_id})
     res.status(200).json(task)
 })
 
